@@ -1,0 +1,15 @@
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+motor==3.1.1       # Compatible with pymongo 4.x for Python 3.11
+pymongo==4.6.3     # Latest stable for 3.11 that should avoid _QUERY_OPTIONS issue
+beanie==1.23.0     # Let's try the latest beanie first, it should pull compatible pydantic
+# pydantic # Removed explicit pydantic pin, let beanie/fastapi dictate
+# pydantic-core # Removed explicit pydantic-core pin
+email-validator==2.2.0 # Keep this explicit for EmailStr validation
+python-dotenv==1.0.1
+google-generativeai==0.7.0
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+pydantic-settings==2.3.3
+httpx==0.27.0
+requests==2.32.3
