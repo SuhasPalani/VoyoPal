@@ -21,6 +21,7 @@ from app.models.gemini_models import (
     TripPlanningAnalysis,
     OptimizedItinerary,
     SuggestedLocation,  # Used in request body
+    InitialTripResponse,  # <--- ADDED THIS IMPORT
 )
 
 router = APIRouter()
@@ -76,7 +77,9 @@ class LocationSelectionRequest(BaseModel):
     )
 
 
-@router.post("/plan/initial-suggestions", response_model=InitialTripSuggestions)
+@router.post(
+    "/plan/initial-suggestions", response_model=InitialTripResponse
+)  # <--- CHANGED RESPONSE_MODEL
 async def get_initial_suggestions(
     request: InitialPlanRequest, current_user: User = Depends(get_current_user)
 ):
@@ -131,7 +134,7 @@ async def get_initial_suggestions(
         response_data = suggestions.model_dump()
         response_data["trip_id"] = str(new_trip.id)  # Convert ObjectId to string
 
-        return response_data
+        return response_data  # This now matches InitialTripResponse model
 
     except Exception as e:
         print(f"Error in initial suggestions endpoint: {e}")
